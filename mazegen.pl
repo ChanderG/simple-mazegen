@@ -33,27 +33,31 @@ push @row, '1';
 my @visited = map [@row], 1 .. $h;
 push @visited, [map '1', 0 .. $w];
 
-print2dArray @visited;
+#print2dArray @visited;
 
 my @hor = map [map '+--', 1 .. $w], 0 .. $h;
 my @ver = map [map '|  ', 1 .. $w], 1 .. $h;
 
-print2dArray @hor;
-print2dArray @ver;
+#print2dArray @hor;
+#print2dArray @ver;
 
-for my $i (0 .. $h-1) {
-  print "@{$hor[$i]}",'+';
-  print "\n";
-  print "@{$ver[$i]}",'|';
+sub printMaze {
+  for my $i (0 .. $h - 1) {
+    print "@{$hor[$i]}",'+';
+    print "\n";
+    print "@{$ver[$i]}",'|';
+    print "\n";
+  }
+  print "@{$hor[$h]}",'+';
   print "\n";
 }
-print "@{$hor[$h]}",'+';
-print "\n";
+
+printMaze; 
 
 sub visit_room {
-  my ($x, $y) = $_;
-  print $w,"\n";
-  print $h,"\n";
+  (my $x, my $y) = @_;
+  print $x,"\n";
+  print $y,"\n";
 }
 
 visit_room 0, 0

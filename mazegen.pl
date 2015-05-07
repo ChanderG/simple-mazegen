@@ -2,13 +2,28 @@ use strict;
 use warnings;
 
 # helper subs
-# simple 1d array print sub
+# simple 1d array print sub with:
+# 1) spaces seperating the elements of the area
+# 2) a newline at the end
 sub printArray {
   my @array = @_;   # as an array is passed in
   foreach (@array) {
     print $_," ";
   }  
   print "\n";
+}
+
+# simple 1d array print sub with:
+# 1) no spaces seperating the elements of the area
+sub printArrayNoFormatting {
+  my @array = @_;   # as an array is passed in
+
+  # more direct alternative
+  # print join('', @array);
+
+  foreach (@array) {
+    print $_;
+  }  
 }
 
 # simple 2d array print sub
@@ -43,13 +58,13 @@ my @ver = map [map '|  ', 1 .. $w], 1 .. $h;
 
 sub printMaze {
   for my $i (0 .. $h - 1) {
-    print "@{$hor[$i]}",'+';
-    print "\n";
-    print "@{$ver[$i]}",'|';
-    print "\n";
+    printArrayNoFormatting @{$hor[$i]};
+    print "+\n";
+    printArrayNoFormatting @{$ver[$i]};
+    print "|\n";
   }
-  print "@{$hor[$h]}",'+';
-  print "\n";
+  printArrayNoFormatting @{$hor[$h]};
+  print "+\n";
 }
 
 printMaze; 

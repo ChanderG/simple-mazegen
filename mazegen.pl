@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-# helper sub
+# helper subs
 sub printArray {
   my @array = @_;   # as an array is passed in
   foreach (@array) {
@@ -17,18 +17,20 @@ sub print2dArray {
   }
 }
 
-# need to use my the first time a varb is used iff strict is used
+# end helper subs 
+
+# need to use 'my' the first time a varb is used iff strict is used
 my ($w, $h) = @ARGV;
 $w ||= 16;
 $h ||= 8;
 
-#my @visited = map [(('1') * $w), ('')], 1 .. $h;
-my @visited = map [ map '0',1 .. $w, '1'], 1 .. $h;
-=example 2d arrray
-my @visited = ( [1,2,3],
-                [4,5,6],
-		[7,8,9]);
-=cut
+my @row = map '0', 1 .. $w;
+push @row, '1';
+#printArray @row;
+
+my @visited = map [@row], 1 .. $h;
+push @visited, [map '1', 0 .. $w];
+
 print2dArray @visited;
 
 sub visit_room {

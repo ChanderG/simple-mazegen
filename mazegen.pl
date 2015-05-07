@@ -1,6 +1,8 @@
 use strict;
 use warnings;
 
+use List::Util qw(shuffle max);
+
 # helper subs
 # simple 1d array print sub with:
 # 1) spaces seperating the elements of the area
@@ -67,12 +69,59 @@ sub printMaze {
   print "+\n";
 }
 
-printMaze; 
-
 sub visit_room {
   (my $x, my $y) = @_;
-  print $x,"\n";
-  print $y,"\n";
+  #print $x,"\n";
+  #print $y,"\n";
+
+  if($x == -1) { $x = $w; }
+  if($y == -1) { $y = $h; }
+
+  $visited[$y][$x] = '1';
+
+  my @neighbours = ([$x - 1, $y], [$x+1, $y], [$x, $y-1], [$x, $y+1]);
+  #print2dArray @neighbours;
+
+  # going with the shuffling as done in the Python version
+  # requires external module 
+  
+  @neighbours = shuffle ( @neighbours );
+  #print2dArray @neighbours;
+  
+  foreach (@neighbours) {
+    #print @$_, "\n"; 
+    my ($xx, $yy) = @$_;
+
+    if ($xx == -1) { $xx = $w; }
+    if ($yy == -1) { $yy = $h; }
+
+=cut not sure about this
+    SWITCH:
+    for (@$_) {
+      if ($visited[$y)
+      ????
+    }
+
+    the switch shown here won't cut it
+    we need to use a later syntax?
+=cut
+
+    if($visited[$yy][$xx] == 1){
+      next;
+    }
+    elsif($xx == $x){
+      $hor[max($yy, $y)][$x] = '+  ';
+    }
+    elsif($yy == $y){
+      $ver[$y][max($xx, $x)] = '   ';
+    }
+    else{
+    }
+
+    visit_room($xx, $yy);
+  }
 }
 
-visit_room 0, 0
+visit_room(int rand $w, int rand $h);
+
+printMaze; 
